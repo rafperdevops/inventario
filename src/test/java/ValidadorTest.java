@@ -22,21 +22,25 @@ public class ValidadorTest {
     
     @Test
     public void testEsNombreValido(){
-        
+        assertTrue(Validador.esNombreValido("Producto A")); // Nombre válido
+        assertFalse(Validador.esNombreValido(""));           // Nombre no válido (vacío)
     }
     
     @Test
     public void testEsCantidadValida(){
-        
+        assertTrue(Validador.esCantidadValida(10));  // Cantidad válida
+        assertFalse(Validador.esCantidadValida(-5)); // Cantidad no válida (negativa)
     }
     
     @Test
     public void testEsPrecioValido(){
-        
+        assertTrue(Validador.esPrecioValido(20.5));  // Precio válido
+        assertFalse(Validador.esPrecioValido(-5.0)); // Precio no válido (negativo)
     }
     
     @Test
     public void testValidarRangoPrecio(){
-        
+        assertTrue(Validador.validarPrecioEnRango(10.0, 5.0, 15.0));  // Precio dentro del rango
+        assertFalse(Validador.validarPrecioEnRango(20.0, 5.0, 15.0)); // Precio fuera del rango
     }
 }
