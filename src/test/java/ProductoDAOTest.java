@@ -3,6 +3,7 @@ import com.fedecafe.com.fedecafe.inventario.Producto;
 import com.fedecafe.com.fedecafe.inventario.ProductoDAO;
 import java.sql.SQLException;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
  * @author pcdev
  */
 public class ProductoDAOTest {
-    
+
     private ProductoDAO productoDAO;
 
     @BeforeEach
@@ -20,22 +21,31 @@ public class ProductoDAOTest {
         productoDAO = new ProductoDAO();
     }
 
+    @AfterEach
+    public void cleanUp(){
+        productoDAO.eliminarProducto(10000000);
+    }
+    
     @Test
     public void testInsertarProducto() throws SQLException {
+        //Preparación
         Producto producto = new Producto("ProductoTest", 1000000, 15, 10.0);
-        productoDAO.insertarProducto(producto);
-
+        //Ejecución
+        assertTrue(productoDAO.insertarProducto(producto));
         List<Producto> productos = productoDAO.obtenerTodosLosProductos();
+        //Afirmación
         assertTrue(productos.contains(producto));
     }
 
     @Test
-    public void testObtenerTodosLosProductos() {
-        // Realiza la inserción de algunos productos en la base de datos antes de la prueba
-        //...
+    public void testObtenerTodosLosProductos() throws SQLException {
+        //Preparación
+        Producto producto = new Producto("ProductoTest", 10000000, 15, 10.0);
+        productoDAO.insertarProducto(producto);
+        //Ejecución
 
-        List<Producto> productos = productoDAO.obtenerTodosLosProductos();
-        assertNotNull(productos);
+        List<Producto> lista = productoDAO.obtenerTodosLosProductos();
+        assertNotNull(lista);
         // Realiza aserciones sobre la lista de productos obtenidos
         // Por ejemplo, verifica si la lista no está vacía o contiene ciertos elementos
     }
