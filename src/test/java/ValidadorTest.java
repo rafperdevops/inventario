@@ -19,5 +19,24 @@ public class ValidadorTest {
         //Prueba un código inválido
         assertFalse(Validador.esCodigoValido("sdfsdf"));
     }
-
+    
+    @Test
+    public void testEsNombreValido(){
+        
+    }
+    
+    @Test
+    public void testEsCantidadValida(){
+        
+    }
+    
+    @Test
+    public void testEsPrecioValido(){
+        
+    }
+    
+    @Test
+    public void testValidarRangoPrecio(){
+        
+    }
 }
